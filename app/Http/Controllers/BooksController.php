@@ -13,6 +13,7 @@ class BooksController extends Controller
   }
   public function store(ErrorFormRequest $request)
   {
+
     $judul_buku = $request->judul_buku;
     $tahun_terbit = $request->tahun_terbit;
     $pengarang = $request->pengarang;
@@ -27,7 +28,7 @@ class BooksController extends Controller
       'cover' => $cover
     ]);
 
-    return redirect()->route('books.create');
+    return redirect()->route('books.index');
   }
   public function index()
   {
@@ -46,5 +47,13 @@ class BooksController extends Controller
     $book = Book::findOrfail($id);
 
     return view('books.edit', compact('book'));
+  }
+  public function destroy($id)
+  {
+    $book = Book::findOrfail($id);
+
+    $book->delete();
+
+    return redirect()->route('books.index');
   }
 }

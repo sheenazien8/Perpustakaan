@@ -21,6 +21,6 @@ Route::get('books/{id}','BooksController@show')->name('books.show');
 
 Route::get('books/{id}/edit','BooksController@edit')->name('books.edit');
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::patch('books/{id}', 'BooksController@update')->name('books.update');
+
+Route::delete('books/{id}', 'BooksController@destroy')->name('books.destroy');

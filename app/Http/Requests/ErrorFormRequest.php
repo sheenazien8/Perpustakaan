@@ -30,7 +30,7 @@ class ErrorFormRequest extends FormRequest
         'cover' => 'required|image|max:2048|mimes:jpeg,png,jpg,gif,svg'
       ];
   }
-  public function message()
+  public function messages()
   {
     return[
       'judul_buku.required' => 'isi dulu judul bukunya',

@@ -18,9 +18,14 @@
         <td>{{$book->judul_buku}}</td>
         <td>{{$book->tahun_terbit}}</td>
         <td>{{$book->pengarang}}</td>
-        <td>{{$book->cover}}</td>
+        <td><img src="/images/{{$book->cover}}" width="80px" alt=""></td>
         <td><a      href="{{route('books.show',$book->id)}}">Lihat buku</a>
         <a href="{{route('books.edit',$book->id)}}">Edit Buku</a>
+        <form action="{{route('books.destroy',$book->id)}}" method="post">
+          @csrf
+          @method('DELETE')
+          <input type="submit" value="Hapus!!!">
+        </form>
         </td>
       </tr>
     @endforeach
