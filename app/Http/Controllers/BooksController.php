@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Requests\ErrorFormRequest;
 use App\Book;
 use Illuminate\Http\Request;
 
@@ -10,19 +11,14 @@ class BooksController extends Controller
   {
     return view('books.create');
   }
-  public function store(Request $request)
+  public function store(ErrorFormRequest $request)
   {
-    $request->validate([
-        'nama' => 'required',
-        'umur' => 'required',
-        'alamat' => 'required',
-        'jenis_kelamin' => 'required'
-      ]);
-      
     $judul_buku = $request->judul_buku;
     $tahun_terbit = $request->tahun_terbit;
     $pengarang = $request->pengarang;
-    $cover   = $request->cover;
+    $cover = time().'.'.request()->cover->getClientOriginalExtension();
+    request()->cover->move(public_path('images'), $cover);
+
 
     Book::create([
       'judul_buku' => $judul_buku,
@@ -32,5 +28,23 @@ class BooksController extends Controller
     ]);
 
     return redirect()->route('books.create');
+  }
+  public function index()
+  {
+    $book = Book::all();
+
+    return view('books.index',compact('book'));
+  }
+  public function show($id)
+  {
+    $book = Book::findOrfail($id);
+
+    return view('books.show', compact('book'));
+  }
+  public function edit($id)
+  {
+    $book = Book::findOrfail($id);
+
+    return view('books.edit', compact('book'));
   }
 }

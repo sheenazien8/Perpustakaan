@@ -1,5 +1,5 @@
 <h3>Masukkan buku yang ingin kamu simpan</h3>
-<form action="{{ route('books.store') }}" method="post" enctype="multipart/form-data">
+<form action="{{ route('books.store') }}" method="post">
   @csrf
   <label>Judul Buku</label>
   @if ($errors->has('judul_buku'))
@@ -23,7 +23,7 @@
   @if ($errors->has('cover'))
     <strong>{{ $errors->first('cover')}}</strong>
   @endif
-  <input type="file" name="cover"> <br>
+  <input type="text" name="cover"> <br>
 
   <button type="submit" name="save">Save!!!</button>
   <button type="submit" name="cancel"><a href="{{route('books.index')}}">Cancel</a> </button>

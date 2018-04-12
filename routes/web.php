@@ -11,9 +11,15 @@
 |
 */
 
-Route::get('books/create', 'BooksController@create')->name('books.create');
+Route::get('books/create','BooksController@create')->name('books.create');
+
+Route::get('books/index', 'BooksController@index')->name('books.index');
 
 Route::post('books', 'BooksController@store')->name('books.store');
+
+Route::get('books/{id}','BooksController@show')->name('books.show');
+
+Route::get('books/{id}/edit','BooksController@edit')->name('books.edit');
 
 // Route::get('/', function () {
 //     return view('welcome');
