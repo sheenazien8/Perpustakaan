@@ -27,7 +27,7 @@ class ErrorFormRequest extends FormRequest
         'judul_buku' => 'required',
         'tahun_terbit' => 'required',
         'pengarang' => 'required',
-        'cover' => 'required'
+        'cover' => 'required|image|max:2048|mimes:jpeg,png,jpg,gif,svg'
       ];
   }
   public function message()

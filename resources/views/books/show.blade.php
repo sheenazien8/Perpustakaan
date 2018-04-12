@@ -4,5 +4,5 @@
   <li>Judul Buku: {{$book->judul_buku}}</li>
   <li>Tahun Terbit: {{$book->tahun_terbit}}</li>
   <li>Pengarang: {{$book->pengarang}}</li>
-  <li>Cover: {{$book->cover}}</li>
+  <li>Cover: <img src="/images/{{$book->cover}}" alt="" width="200px"></li>
 </ul>
