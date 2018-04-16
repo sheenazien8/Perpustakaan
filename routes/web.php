@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Route::get('books/create','BooksController@create')->name('books.create');
 
-Route::get('books/index', 'BooksController@index')->name('books.index');
+Route::get('books/list', 'BooksController@index')->name('books.list');
 
 Route::post('books', 'BooksController@store')->name('books.store');
 

@@ -30,7 +30,7 @@
               <div class="collapse navbar-collapse">
                 <ul class="navbar-nav mr-auto">
                   <li class="nav-item">
-                    <a class="nav-link" href="{{ route('books.index') }}">Daftar Buku </a>
+                    <a class="nav-link" href="{{ route('books.list') }}">Daftar Buku </a>
                   </li>
                 </ul>
               </div>

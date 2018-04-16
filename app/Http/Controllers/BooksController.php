@@ -15,7 +15,6 @@ class BooksController extends Controller
   }
   public function store(ErrorFormRequest $request)
   {
-
     $judul_buku = $request->judul_buku;
     $tahun_terbit = $request->tahun_terbit;
     $pengarang = $request->pengarang;
@@ -30,7 +29,7 @@ class BooksController extends Controller
       'cover' => $cover
     ]);
 
-    return redirect()->route('books.index');
+    return redirect()->route('books.list');
   }
   public function index(Request $request, Builder $htmlBuilder)
   {
@@ -42,11 +41,11 @@ class BooksController extends Controller
 
     $html = $htmlBuilder->columns([
       ['data' => 'judul_buku', 'name' => 'judul_buku', 'title' => 'Judul Buku'],
-      ['data' => 'tahun_terbit', 'name' => 'tahun_terbit', 'title' => 'Pengarang'],
+      ['data' => 'tahun_terbit', 'name' => 'tahun_terbit', 'title' => 'Tahun Terbit'],
       ['data' => 'pengarang', 'name' => 'pengarang', 'title' => 'Pengarang'],
     ]);
 
-    return view('books.index',compact('html'));
+    return view('books.list',compact('html'));
   }
   public function show($id)
   {
@@ -71,7 +70,7 @@ class BooksController extends Controller
 
     $book->save();
 
-    return redirect()->route('santri.index');
+    return redirect()->route('books.list');
   }
   public function destroy($id)
   {
@@ -79,6 +78,6 @@ class BooksController extends Controller
 
     $book->delete();
 
-    return redirect()->route('books.index');
+    return redirect()->route('books.list');
   }
 }
