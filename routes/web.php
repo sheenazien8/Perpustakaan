@@ -11,6 +11,10 @@
 |
 */
 
+Route::get('/', function () {
+    return view('welcome');
+});
+
 Route::get('books/create','BooksController@create')->name('books.create');
 
 Route::get('books/index', 'BooksController@index')->name('books.index');

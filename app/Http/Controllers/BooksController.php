@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ErrorFormRequest;
 use App\Book;
 use Illuminate\Http\Request;
+use DataTables;
+use Yajra\DataTables\Html\Builder;
 
 class BooksController extends Controller
 {
@@ -30,11 +32,21 @@ class BooksController extends Controller
 
     return redirect()->route('books.index');
   }
-  public function index()
+  public function index(Request $request, Builder $htmlBuilder)
   {
-    $book = Book::all();
+    if ($request->ajax()) {
+      $books = Book::all();
 
-    return view('books.index',compact('book'));
+      return Datatables::of($books)->toJson();
+    }
+
+    $html = $htmlBuilder->columns([
+      ['data' => 'judul_buku', 'name' => 'judul_buku', 'title' => 'Judul Buku'],
+      ['data' => 'tahun_terbit', 'name' => 'tahun_terbit', 'title' => 'Pengarang'],
+      ['data' => 'pengarang', 'name' => 'pengarang', 'title' => 'Pengarang'],
+    ]);
+
+    return view('books.index',compact('html'));
   }
   public function show($id)
   {
@@ -47,6 +59,19 @@ class BooksController extends Controller
     $book = Book::findOrfail($id);
 
     return view('books.edit', compact('book'));
+  }
+  public function update(ErrorFormRequest $request, $id)
+  {
+    $book = Book::findOrFail($id);
+
+    $book->judul_buku = $request->judul_buku;
+    $book->tahun_terbit = $request->tahun_terbit;
+    $book->pengarang = $request->pengarang;
+    $book->cover = $request->cover;
+
+    $book->save();
+
+    return redirect()->route('santri.index');
   }
   public function destroy($id)
   {
